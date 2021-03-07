@@ -17,7 +17,7 @@ class App extends React.Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>{this.state.sprongText}</p>
-          <button onClick={() => this.setState({ sprongText: "IT CHANGED!", 'dlts' })}>
+          <button onClick={() => this.setState({ sprongText: "IT CHANGED!" })}>
             Change Text
           </button>
         </header>
