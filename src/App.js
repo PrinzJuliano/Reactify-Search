@@ -24,6 +24,11 @@ class App extends React.Component {
       );
   }
 
+  updateSearch = (event) => {
+    // Arrow function uses lexical scoping (binds this to context)
+    this.setState({ searchField: event.target.value });
+  };
+
   render() {
     const { monsters, searchField } = this.state;
     const filteredMonsters = monsters.filter((monster) =>
@@ -32,10 +37,11 @@ class App extends React.Component {
 
     return (
       <div className="App">
+        <h1 className="dark:text-blue-500 text-blue-700">Search 707</h1>
         <ThemeToggleComponent />
         <SearchBoxComponent
           placeholder="Search Monsters..."
-          onChange={(e) => this.setState({ searchField: e.target.value })}
+          onChange={this.updateSearch}
         />
         <CardList monsters={filteredMonsters} />
       </div>
