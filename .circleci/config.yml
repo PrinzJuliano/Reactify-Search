@@ -27,10 +27,10 @@ jobs:
       - cypress/install:
           build: "yarn build"
           requires:
-            - node/install-packages
+            - "node/install-packages"
       - cypress/run:
           requires:
-            - cypress/install
+            - "cypress/install"
           record: true # record results on Cypress Dashboard
           parallel: true # split all specs across machines
           parallelism: 4 # use 4 CircleCI machines to finish quickly
