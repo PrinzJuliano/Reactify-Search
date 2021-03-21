@@ -23,7 +23,15 @@ jobs:
             - ~/.cache/yarn
             - ~/.cache/Cypress
       - run: yarn lint
-      - run: yarn test
+      - run:
+          command: yarn test:ci
+          name: "Testing Jest"
+          environment:
+            JEST_JUNIT_OUTPUT_DIR: ./reports/junit/
+      - store_test_results:
+          path: ./reports/junit/
+      - store_artifacts:
+          path: ./reports/junit
       - run: yarn cypress install && yarn ci:cypress-run
       - run: yarn build
   deploy:
