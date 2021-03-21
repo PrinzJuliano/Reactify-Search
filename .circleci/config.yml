@@ -1,0 +1,28 @@
+version: 2.1
+
+orbs:
+  node: circleci/node@4.2.0
+  cypress: cypress-io/cypress@1.23.0
+
+jobs:
+  test:
+    docker:
+      - image: circleci/node:15-browsers
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore Yarn Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - node/install-packages:
+          pkg-manager: yarn
+          immutable: true
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+      - run: yarn lint
+      - run: yarn test
+      - run: yarn ci:cypress-run
+      - run: yarn build
