@@ -24,19 +24,9 @@ jobs:
             - ~/.cache/Cypress
       - run: yarn lint
       - run: yarn test
+      - run: yarn ci:cypress-run
       - run: yarn build
 workflows:
   test_my_app:
     jobs:
       - test
-      - cypress/install:
-            build: "yarn build"
-      - cypress/run:
-          requires:
-            - cypress/install
-          record: true # record results on Cypress Dashboard
-          parallel: true # split all specs across machines
-          parallelism: 4 # use 4 CircleCI machines to finish quickly
-          group: 'all tests' # name this group "all tests" on the dashboard
-          start: 'npm start' # start server before running tests
-          wait-on: "http://localhost:3000/Reactify-Search"
