@@ -24,3 +24,5 @@ yarn-error.log*
 
 .ssl/*
 !.ssl/.gitkeep
+
+cypress/videos
