@@ -16,7 +16,6 @@ jobs:
             - yarn-packages-{{ checksum "yarn.lock" }}
       - node/install-packages:
           pkg-manager: yarn
-          immutable: true
       - save_cache:
           name: Save Yarn Package Cache
           key: yarn-packages-{{ checksum "yarn.lock" }}
