@@ -2,8 +2,7 @@ import "./App.css";
 import React from "react";
 import { CardList } from "./components/card-list/card-list.component";
 import { ThemeToggleComponent } from "./components/theme-toggle/theme-toggle.component";
-
-// import { Search } from "carbon-components-react";
+import { SearchBoxComponent } from "./components/search-box/search-box.component";
 
 class App extends React.Component {
   constructor(props) {
@@ -26,19 +25,19 @@ class App extends React.Component {
   }
 
   render() {
+    const { monsters, searchField } = this.state;
+    const filteredMonsters = monsters.filter((monster) =>
+      monster.name.toLowerCase().includes(searchField.toLowerCase())
+    );
+
     return (
       <div className="App">
         <ThemeToggleComponent />
-        <input
-          type="search"
-          className=""
-          placeholder="search monsters"
-          onChange={(event) =>
-            this.setState({ searchField: event.target.value })
-          }
+        <SearchBoxComponent
+          placeholder="Search Monsters..."
+          onChange={(e) => this.setState({ searchField: e.target.value })}
         />
-        {/*<Search id="search-1" placeholder="search monsters" />*/}
-        <CardList monsters={this.state.monsters} />
+        <CardList monsters={filteredMonsters} />
       </div>
     );
   }
