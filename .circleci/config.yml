@@ -50,6 +50,14 @@ jobs:
           key: yarn-packages-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache/yarn
+      - run:
+          name: Configure GIT
+          command: |
+            git config user.email "ci-build@pjog.de"
+            git config user.name "ci-build"
+      - add_ssh_keys:
+          fingerprints:
+            - "85:04:0a:cd:ae:a4:30:4a:c1:86:67:fb:d7:91:8e:98"
       - run: yarn deploy
 workflows:
   test_my_app:
