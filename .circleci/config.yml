@@ -24,7 +24,7 @@ jobs:
             - ~/.cache/Cypress
       - run: yarn lint
       - run: yarn test
-      - run: cypress install && yarn ci:cypress-run
+      - run: yarn cypress install && yarn ci:cypress-run
       - run: yarn build
 workflows:
   test_my_app:
