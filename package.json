@@ -30,7 +30,9 @@
     "postinstall": "mkcert -cert-file .ssl/localhost.pem -key-file .ssl/localhost-key.pem localhost",
     "lint": "prettier -c src/**/*.{js,jsx,ts,tsx,json,css,scss,md}",
     "predeploy": "yarn build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "cypress:run": "cypress run --record --key=${CYPRESS_RECORD_KEY}",
+    "ci:cypress-run": "start-server-and-test start http://localhost:3000 cypress:run"
   },
   "eslintConfig": {
     "extends": [
@@ -63,7 +65,9 @@
   "devDependencies": {
     "@tailwindcss/postcss7-compat": "^2.0.3",
     "autoprefixer": "^9",
+    "cypress": "^6.8.0",
     "postcss": "^7",
+    "start-server-and-test": "^1.12.1",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat"
   }
 }
